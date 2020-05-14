@@ -2,6 +2,7 @@ import pygame
 import os
 import time
 import random
+
 pygame.font.init()
 
 WIDTH, HEIGHT = 750, 750
@@ -154,8 +155,9 @@ def main():
     lost_count = 0
     laser_vel = 8
 
-    main_font = pygame.font.SysFont("DramaSans", 50)
-    lost_font = pygame.font.SysFont("Dramasans", 60)
+    main_font = pygame.font.SysFont("Drama Sans", 30)
+    lost_font = pygame.font.SysFont("Drama Sans", 60)
+    dead_font = pygame.font.SysFont("Drama Sans", 74)
 
     enemies = []
     wave_length = 5
@@ -169,8 +171,9 @@ def main():
 
     def redraw_window():
         WIN.blit(BG, (0,0))
+
         # draw text
-        lives_label = main_font.render(f"Lives: {lives}", 1, (255,0,0))
+        lives_label = main_font.render(f"Lives: {lives}", 1, (255,0,0), (255,255,255))
         level_label = main_font.render(f"Level: {level}", 1, (255,255,255))
 
         WIN.blit(lives_label, (10, 10))
@@ -188,13 +191,22 @@ def main():
             WIN.blit(lost_label, (WIDTH/2 - lost_label.get_width()/2, 350))
 
 
+
     while run:
         clock.tick(FPS)
         redraw_window()
-        if lives <= 0 or player.health <= 0:
+        if lives <= 0:
             lost = True
             lost_count += 1
 
+        if player.health <= 0:
+            if level > 1:
+                level -= 1
+            lives -= 1
+            dead_label = dead_font.render("You Died!", 1, (255,0,0), (255,255,255))
+            WIN.blit(dead_label, (WIDTH/2 - dead_label.get_width()/2, 350))
+            player.health = 100
+        
         if lost:
             if lost_count > FPS * 3:
                 run = False
