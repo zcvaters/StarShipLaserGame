@@ -1,13 +1,13 @@
 # PyGame WIP
 
 
-TODO:
+## TODO:
 
-[ ] Hit Marker Animation
+- [ ] Hit Marker Animation
 
-[ ] Redesign Main Menu
+- [ ] Redesign Main Menu
 
-[ ] Level Progression(Level selection?)
+- [ ] Level Progression(Level selection?)
 
-[ ] Graphics Enhancments
+- [ ] Graphics Enhancments
 
