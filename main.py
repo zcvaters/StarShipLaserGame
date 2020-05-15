@@ -153,7 +153,7 @@ def main():
     lives = 3
     lost = False
     lost_count = 0
-    laser_vel = 8
+    laser_vel = 10
 
     main_font = pygame.font.SysFont("Drama Sans", 30)
     lost_font = pygame.font.SysFont("Drama Sans", 60)
@@ -173,11 +173,11 @@ def main():
         WIN.blit(BG, (0,0))
 
         # draw text
-        lives_label = main_font.render(f"Lives: {lives}", 1, (255,0,0), (255,255,255))
-        level_label = main_font.render(f"Level: {level}", 1, (255,255,255))
+        lives_label = main_font.render(f"Lives: {lives}", 1, (255,0,0))
+        level_label = main_font.render(f"Level: {level}", 1, (255,0,0))
 
         WIN.blit(lives_label, (10, 10))
-        WIN.blit(level_label, (WIDTH - level_label.get_width() - 10, 10))
+        WIN.blit(level_label, (10, 40))
 
         for enemy in enemies:
             enemy.draw(WIN)
@@ -189,6 +189,9 @@ def main():
         if lost:
             lost_label = lost_font.render("You lost!", 1, (255,255,255))
             WIN.blit(lost_label, (WIDTH/2 - lost_label.get_width()/2, 350))
+            pygame.display.update()
+            pygame.time.delay(1000)
+            main_menu()
 
 
 
@@ -203,8 +206,10 @@ def main():
             if level > 1:
                 level -= 1
             lives -= 1
-            dead_label = dead_font.render("You Died!", 1, (255,0,0), (255,255,255))
+            dead_label = dead_font.render("You Died! :(", 1, (255,0,0))
             WIN.blit(dead_label, (WIDTH/2 - dead_label.get_width()/2, 350))
+            pygame.display.update()
+            pygame.time.delay(1000)
             player.health = 100
         
         if lost:
