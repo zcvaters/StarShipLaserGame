@@ -23,6 +23,9 @@ GREEN_LASER = pygame.image.load(os.path.join("assets",  "pixel_laser_green.png")
 BLUE_LASER = pygame.image.load(os.path.join("assets",  "pixel_laser_blue.png"))
 YELLOW_LASER = pygame.image.load(os.path.join("assets",  "pixel_laser_yellow.png"))
 
+#Hit Marker
+PLAYER_HITMARKER = pygame.image.load(os.path.join("assets", "player_laser_hit_marker.png"))
+
 
 # Background
 BG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "background-black.png")), (WIDTH, HEIGHT))
@@ -250,6 +253,8 @@ def main():
 
             if collide(enemy, player):
                 player.health -= 10
+                print("Player hit")
+                pygame.display.update()
                 enemies.remove(enemy)
 
             elif enemy.y + enemy.get_height() > HEIGHT:
