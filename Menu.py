@@ -1,4 +1,4 @@
-import pygame
+import pygame_menu
 
 """
     Menu Class for the game going to make a more robust looking menu.

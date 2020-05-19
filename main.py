@@ -24,7 +24,7 @@ BLUE_LASER = pygame.image.load(os.path.join("assets",  "pixel_laser_blue.png"))
 YELLOW_LASER = pygame.image.load(os.path.join("assets",  "pixel_laser_yellow.png"))
 
 #Hit Marker
-PLAYER_HITMARKER = pygame.image.load(os.path.join("assets", "player_laser_hit_marker.png"))
+PLAYER_HITMARKER = pygame.image.load(os.path.join("assets", "pixel_ship_yellow_hit.png"))
 
 
 # Background
@@ -73,7 +73,7 @@ class Ship:
             elif laser.collision(obj):
                 obj.health -= 10
                 self.lasers.remove(laser)
-
+                
     def cooldown(self):
         if self.cool_down_counter >= self.COOLDOWN:
             self.cool_down_counter = 0
@@ -146,8 +146,6 @@ def collide(obj1, obj2):
     offset_x = obj2.x - obj1.x
     offset_y = obj2.y - obj1.y
     return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None
-
-
 
 def main():
     run = True
@@ -224,6 +222,7 @@ def main():
         if len(enemies) == 0:
             level += 1
             wave_length += 5
+            player.health = 100
             for i in range(wave_length):
                 enemy = Enemy(random.randrange(50, WIDTH-100), random.randrange(-1500, -100), random.choice(["red", "blue", "green"]))
                 enemies.append(enemy)
